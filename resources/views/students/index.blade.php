@@ -1,3 +1,4 @@
+// resources/views/students/index.blade.php
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +10,9 @@
 <h1>Student List</h1>
 
 <form method="GET" action="{{ route('students.index') }}">
+    <label for="search">Search Name:</label>
+    <input type="text" id="search" name="search" value="{{ request('search') }}">
+
     <label for="course">Course:</label>
     <input type="text" id="course" name="course" value="{{ request('course') }}">
 
@@ -30,10 +34,10 @@
     <tbody>
     @forelse ($students as $student)
         <tr>
-            <td>{{ $student['id'] }}</td>
-            <td>{{ $student['name'] }}</td>
-            <td>{{ $student['course'] }}</td>
-            <td>{{ $student['year'] }}</td>
+            <td>{{ $student->id }}</td>
+            <td>{{ $student->name }}</td>
+            <td>{{ $student->course }}</td>
+            <td>{{ $student->year }}</td>
         </tr>
     @empty
         <tr>
@@ -43,6 +47,10 @@
     </tbody>
 </table>
 
+<!-- Pagination -->
+<div>
+    {{ $students->links() }}
+</div>
 
 </body>
 </html>
